@@ -10,10 +10,12 @@ Out of the box sitecore scripts are modified to allow more granular control over
 * **ports** - possible to set desired ports to each commerce role
 * **locations** - possible to set desired location to each commerce role
 * **certificates** - certificates are generated for each role, or could be shared (using wildcard certificate)
+Also scripts are aligned with XP0 installation (naming, locations) 
 
 _IMPORTANT: SXA installation is currently removed from scripts (but will be added later)_
 
 ##### TODO list:
+* [ ] Clean-up documentation and parameters descriptions
 * [ ] Automate archives extraction, except SIF itself
 * [ ] Try to leverage `Microsoft.Web.XmlTransform.dll` from SIF or download automatically from NuGet
 * [ ] Enable SXA

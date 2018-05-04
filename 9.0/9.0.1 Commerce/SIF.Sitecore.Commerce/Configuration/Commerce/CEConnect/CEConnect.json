@@ -11,7 +11,7 @@
       "Type": "string",
       "Description": "The path to the Adventure Works images zip."
     },
-    "PackagesDirDst": {
+    "SitecoreAdminPackagesDir": {
       "Type": "string",
       "Description": "The path to packages directory."
     },
@@ -38,8 +38,8 @@
       "Type": "EnsurePath",
       "Params": {
         "Exists": [
-          "[parameter('PackageFullPath')]",
-          "[parameter('PackagesDirDst')]"
+          "[parameter('PackageFullPath')]", 
+          "[parameter('SitecoreAdminPackagesDir')]"
         ]
       }
     },
@@ -47,7 +47,7 @@
       "Type": "InstallPackage",
       "Params": {
         "PackageFullPath": "[parameter('PackageFullPath')]",
-        "PackagesDirDst": "[parameter('PackagesDirDst')]",
+        "SitecoreAdminPackagesDir": "[parameter('SitecoreAdminPackagesDir')]",
         "BaseUrl": "[parameter('BaseUrl')]"
       }
     },

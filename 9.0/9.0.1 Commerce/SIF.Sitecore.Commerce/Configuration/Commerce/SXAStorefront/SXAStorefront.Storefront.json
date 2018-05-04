@@ -7,23 +7,23 @@
 // -------------------------------------------------------------------------- //
 {
   "Parameters": {
-    "SXACommerceModuleFullPath": {
+    "PackageSXACommercePath": {
       "Type": "string",
       "Description": "The path to the SXA Commerce module zip."
     },
-    "SXAStorefrontModuleFullPath": {
+    "PackageSXAStorefrontPath": {
       "Type": "string",
       "Description": "The path to the SXA Commerce Storefront module zip."
     },
-	"SXAStorefrontThemeModuleFullPath": {
+    "PackageSXAStorefrontThemePath": {
       "Type": "string",
       "Description": "The path to the SXA Commerce Storefront Theme module zip."
     },
-    "SXAStorefrontCatalogModuleFullPath": {
+    "PackageSXAStorefrontCatalogPath": {
       "Type": "string",
       "Description": "The path to the SXA Commerce Storefront Catalog module zip."
     },
-    "ModulesDirDst": {
+    "SitecoreAppDataPackagesDir": {
       "Type": "string",
       "Description": "The path to modules directory."
     },
@@ -44,22 +44,22 @@
       "Description": "The path to the web config file."
     }
   },
-  "Modules": [ "SitecoreUtilityTasks", "MergeWebConfig" ],
+  "Modules": ["SitecoreUtilityTasks", "MergeWebConfig"],
   "Tasks": {
     "CheckSXAPaths": {
       "Type": "EnsurePath",
       "Params": {
         "Exists": [
-          "[parameter('SXACommerceModuleFullPath')]",
-          "[parameter('ModulesDirDst')]"
+          "[parameter('PackageSXACommercePath')]",
+          "[parameter('SitecoreAppDataPackagesDir')]"
         ]
       }
     },
     "InstallSXAModule": {
       "Type": "InstallModule",
       "Params": {
-        "ModuleFullPath": "[parameter('SXACommerceModuleFullPath')]",
-        "ModulesDirDst": "[parameter('ModulesDirDst')]",
+        "ModuleFullPath": "[parameter('PackageSXACommercePath')]",
+        "SitecoreAppDataPackagesDir": "[parameter('SitecoreAppDataPackagesDir')]",
         "BaseUrl": "[parameter('BaseUrl')]"
       }
     },
@@ -67,16 +67,16 @@
       "Type": "EnsurePath",
       "Params": {
         "Exists": [
-          "[parameter('SXAStorefrontModuleFullPath')]",
-          "[parameter('ModulesDirDst')]"
+          "[parameter('PackageSXAStorefrontPath')]",
+          "[parameter('SitecoreAppDataPackagesDir')]"
         ]
       }
     },
     "InstallStorefrontModule": {
       "Type": "InstallModule",
       "Params": {
-        "ModuleFullPath": "[parameter('SXAStorefrontModuleFullPath')]",
-        "ModulesDirDst": "[parameter('ModulesDirDst')]",
+        "ModuleFullPath": "[parameter('PackageSXAStorefrontPath')]",
+        "SitecoreAppDataPackagesDir": "[parameter('SitecoreAppDataPackagesDir')]",
         "BaseUrl": "[parameter('BaseUrl')]"
       }
     },
@@ -84,16 +84,16 @@
       "Type": "EnsurePath",
       "Params": {
         "Exists": [
-          "[parameter('SXAStorefrontThemeModuleFullPath')]",
-          "[parameter('ModulesDirDst')]"
+          "[parameter('PackageSXAStorefrontThemePath')]",
+          "[parameter('SitecoreAppDataPackagesDir')]"
         ]
       }
     },
     "InstallThemesModule": {
       "Type": "InstallModule",
       "Params": {
-        "ModuleFullPath": "[parameter('SXAStorefrontThemeModuleFullPath')]",
-        "ModulesDirDst": "[parameter('ModulesDirDst')]",
+        "ModuleFullPath": "[parameter('PackageSXAStorefrontThemePath')]",
+        "SitecoreAppDataPackagesDir": "[parameter('SitecoreAppDataPackagesDir')]",
         "BaseUrl": "[parameter('BaseUrl')]"
       }
     },
@@ -101,16 +101,16 @@
       "Type": "EnsurePath",
       "Params": {
         "Exists": [
-          "[parameter('SXAStorefrontCatalogModuleFullPath')]",
-          "[parameter('ModulesDirDst')]"
+          "[parameter('PackageSXAStorefrontCatalogPath')]",
+          "[parameter('SitecoreAppDataPackagesDir')]"
         ]
       }
     },
     "InstallCatalogModule": {
       "Type": "InstallModule",
       "Params": {
-        "ModuleFullPath": "[parameter('SXAStorefrontCatalogModuleFullPath')]",
-        "ModulesDirDst": "[parameter('ModulesDirDst')]",
+        "ModuleFullPath": "[parameter('PackageSXAStorefrontCatalogPath')]",
+        "SitecoreAppDataPackagesDir": "[parameter('SitecoreAppDataPackagesDir')]",
         "BaseUrl": "[parameter('BaseUrl')]"
       }
     },

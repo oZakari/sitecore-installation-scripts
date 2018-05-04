@@ -18,17 +18,17 @@
       "DefaultValue": "https://localhost:8983/solr",
       "Description": "The Solr instance url."
     },
-    "SolrRoot": {
+    "SolrInstallDir": {
       "Type": "string",
       "DefaultValue": "c:\\solr-6.6.2",
       "Description": "The file path to the Solr instance."
     },
-    "SolrService": {
+    "SolrServiceName": {
       "Type": "string",
       "DefaultValue": "Solr-6.6.2",
       "Description": "The name of the Solr service."
     },
-    "SolrSchemas": {
+    "SolrSchemasDir": {
       "Type": "string",
       "Description": "The path to solr schema files."
     },
@@ -37,9 +37,9 @@
       "DefaultValue": "basic_configs",
       "Description": "The configset to copy as a base for each core."
     },
-    "CorePrefix": {
+    "SolrCorePrefix": {
       "Type": "string",
-      "DefaultValue": "",
+      "DefaultValue": "sc9",
       "Description": "The prefix for each of the created indexes."
     }
   },
@@ -48,7 +48,7 @@
     // They can reference Parameters, other Variables, and config functions.
 
     // Resolves the full path to Solr on disk in case a relative path was passed.
-    "Solr.FullRoot": "[resolvepath(parameter('SolrRoot'))]",
+    "Solr.FullRoot": "[resolvepath(parameter('SolrInstallDir'))]",
 
     // Resolves the full solr folder path on disk.
     "Solr.Server": "[joinpath(variable('Solr.FullRoot'), 'server', 'solr')]",
@@ -57,14 +57,14 @@
     "Solr.BaseConfigs": "[joinpath(variable('Solr.Server'), 'configsets', parameter('BaseConfig'))]",
 
     // Resolves the full path for the schemas to use for each core.
-    "Solr.CustomersSchema": "[concat(parameter('SolrSchemas'), '\\Customers')]",
-    "Solr.OrdersSchema": "[concat(parameter('SolrSchemas'), '\\Orders')]",
-    "Solr.CatalogItemsSchema": "[concat(parameter('SolrSchemas'), '\\CatalogItems')]",
+    "Solr.CustomersSchema": "[concat(parameter('SolrSchemasDir'), '\\Customers')]",
+    "Solr.OrdersSchema": "[concat(parameter('SolrSchemasDir'), '\\Orders')]",
+    "Solr.CatalogItemsSchema": "[concat(parameter('SolrSchemasDir'), '\\CatalogItems')]",
 
     // The names of the cores to create.
-    "Customers.Name": "[concat(parameter('CorePrefix'), 'CustomersScope')]",
-    "Orders.Name": "[concat(parameter('CorePrefix'), 'OrdersScope')]",
-    "CatalogItems.Name": "[concat(parameter('CorePrefix'), 'CatalogItemsScope')]",
+    "Customers.Name": "[concat(parameter('SolrCorePrefix'), '_customers_scope')]",
+    "Orders.Name": "[concat(parameter('SolrCorePrefix'), '_orders_scope')]",
+    "CatalogItems.Name": "[concat(parameter('SolrCorePrefix'), '_catalog_items_scope')]",
 
     // The destination paths of the cores to create.
     "Customers.Root": "[joinpath(variable('Solr.Server'), variable('Customers.Name'))]",
@@ -86,7 +86,7 @@
       // Stops the Solr service if it is running.
       "Type": "ManageService",
       "Params": {
-        "Name": "[parameter('SolrService')]",
+        "Name": "[parameter('SolrServiceName')]",
         "Status": "Stopped",
         "PostDelay": 1000
       }
@@ -123,7 +123,7 @@
       // Starts the Solr service.
       "Type": "ManageService",
       "Params": {
-        "Name": "[parameter('SolrService')]",
+        "Name": "[parameter('SolrServiceName')]",
         "Status": "Running",
         "PostDelay": 8000
       }
